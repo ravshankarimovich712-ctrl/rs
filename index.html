@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RS-71: CS2 Miner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+      body { font-family: 'Rajdhani', sans-serif; background-color: #030305; color: #ffffff; -webkit-tap-highlight-color: transparent; overflow: hidden; }
+      .font-orbitron { font-family: 'Orbitron', sans-serif; }
+      .glass-card { background: rgba(15, 15, 20, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.04); }
+      #unboxing-carousel { transition: transform 5s cubic-bezier(0.1, 0, 0.1, 1); width: fit-content; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+</head>
+<body class="max-w-md mx-auto h-screen flex flex-col relative select-none">
+    <header class="p-4 flex justify-between items-center border-b border-white/5 bg-[#0a0a0c]/80 backdrop-blur-md z-20">
+      <div class="flex items-center gap-3">
+        <div id="user-level" class="w-10 h-10 rounded-lg bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center font-orbitron text-cyan-400 font-bold">1</div>
+        <div>
+          <h1 class="text-[10px] text-gray-500 uppercase tracking-widest font-black">Operator</h1>
+          <p class="text-sm font-bold">GHOST_USER</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-full border border-white/5 shadow-inner">
+        <span class="text-orange-500 font-black text-xs">$</span>
+        <span id="balance-display" class="font-orbitron text-sm font-black tracking-tighter">0</span>
+      </div>
+    </header>
+    <main id="view-container" class="flex-1 overflow-y-auto pb-24 px-4 pt-4"></main>
+    <nav class="fixed bottom-4 left-4 right-4 bg-black/40 backdrop-blur-2xl border border-white/5 rounded-2xl p-1.5 flex justify-around items-center z-30 shadow-2xl">
+      <button onclick="router.navigate('home')" class="nav-btn flex flex-col items-center gap-1 py-2 px-4 rounded-xl text-cyan-400 bg-cyan-500/20" data-view="home">
+        <i data-lucide="zap" size="18"></i>
+        <span class="text-[8px] font-black uppercase">Miner</span>
+      </button>
+      <button onclick="router.navigate('cases')" class="nav-btn flex flex-col items-center gap-1 py-2 px-4 rounded-xl text-gray-500" data-view="cases">
+        <i data-lucide="package" size="18"></i>
+        <span class="text-[8px] font-black uppercase">Cases</span>
+      </button>
+      <button onclick="router.navigate('inventory')" class="nav-btn flex flex-col items-center gap-1 py-2 px-4 rounded-xl text-gray-500" data-view="inventory">
+        <i data-lucide="shield" size="18"></i>
+        <span class="text-[8px] font-black uppercase">Vault</span>
+      </button>
+      <button onclick="router.navigate('tasks')" class="nav-btn flex flex-col items-center gap-1 py-2 px-4 rounded-xl text-gray-500" data-view="tasks">
+        <i data-lucide="list-checks" size="18"></i>
+        <span class="text-[8px] font-black uppercase">Tasks</span>
+      </button>
+    </nav>
+    <div id="unboxing-modal" class="fixed inset-0 z-50 hidden items-center justify-center px-4 bg-black/95 backdrop-blur-2xl">
+      <div class="w-full max-w-md flex flex-col items-center">
+        <h2 class="text-xl font-orbitron font-black text-cyan-400 mb-8 uppercase tracking-[0.2em] animate-pulse">Unboxing</h2>
+        <div class="relative w-full h-44 overflow-hidden border-y border-white/5 bg-black/60">
+          <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-yellow-400 z-10 -translate-x-1/2"></div>
+          <div id="unboxing-carousel" class="flex items-center gap-1 h-full pl-[50%]"></div>
+        </div>
+        <div id="unboxing-result" class="mt-8 text-center opacity-0 transition-opacity duration-500">
+          <span class="text-[10px] text-gray-500 font-black uppercase tracking-widest">Received</span>
+          <div id="result-name" class="text-lg font-orbitron font-black mt-2 uppercase"></div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./index.tsx"></script>
+    <script>setTimeout(() => lucide.createIcons(), 500);</script>
+</body>
+</html>
